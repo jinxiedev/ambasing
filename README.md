@@ -1,4 +1,4 @@
-# Air Quality Dashboard ✨
+
 
 ## Setup Environment
 1. Buka terminal/command prompt.
