@@ -16,13 +16,20 @@ aqi_labels = ['Good', 'Moderate', 'Unhealthy for Sensitive Groups', 'Unhealthy',
 # Menyiapkan dan Membersihkan Data
 @st.cache_data
 def load_data():
-    data = pd.read_csv("main_data.csv")
-    # Pastikan format datetime
-    data['datetime'] = pd.to_datetime(data['datetime'])
-    
-    # Menerapkan Binning untuk Analisis Lanjutan (AQI)
-    data['AQI_Category'] = pd.cut(data['PM2.5'], bins=aqi_bins, labels=aqi_labels, include_lowest=True)
-    
+    BASE_DIR = Path(__file__).resolve().parent
+    data_path = BASE_DIR / "main_data.csv"
+
+    data = pd.read_csv(data_path)
+
+    data["datetime"] = pd.to_datetime(data["datetime"])
+
+    data["AQI_Category"] = pd.cut(
+        data["PM2.5"],
+        bins=aqi_bins,
+        labels=aqi_labels,
+        include_lowest=True
+    )
+
     return data
 
 df = load_data()
